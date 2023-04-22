@@ -13,10 +13,7 @@ public class Main {
                 showMainMenu();
                 int choose = inputFromUser.nextInt();
                 switch (choose) {
-                    case 1 -> {
-                        fileManager.showMenuOne();
-                    }
-
+                    case 1 -> fileManager.showMenuOne();
                     case 2 -> System.out.println("Choose 2");
                     case 3 -> {
                         System.out.println("Good bye and see you again");
@@ -25,7 +22,7 @@ public class Main {
                     default -> System.out.println("Number is not available, please try again");
                 }
             } catch (Exception e) {
-                System.out.println("Please enter number");
+                System.out.println("Error, please enter a number");
                 inputFromUser.nextLine();
             }
 

@@ -1,9 +1,6 @@
 package Bai1.TimKiem;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,32 +11,31 @@ public class FileManager {
     public void showMenuOne() {
         try {
             System.out.print("Enter path: ");
-            this.readFile(inputFromUser.nextLine());
+            String getTextFromFile = this.readFile(inputFromUser.nextLine());
             System.out.print("Enter word: ");
-            this.findWordInFile("cuong", inputFromUser.nextLine());
+            this.findWordInFile(getTextFromFile, inputFromUser.nextLine());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private void readFile(String filePath) throws Exception {
+    private String readFile(String filePath) throws Exception {
         try {
             File myFile = new File(filePath.replace("\"", ""));
             FileReader fileReader = new FileReader(myFile);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuilder stringBuilder = new StringBuilder();
 
             String line = bufferedReader.readLine();
             while (line != null) {
-                System.out.println(line);
+                stringBuilder.append(line);
                 line = bufferedReader.readLine();
             }
 
-            fileReader.close();
-
-
+            return stringBuilder.toString();
         } catch (FileNotFoundException e) {
-            throw new Exception("Không tìm thấy file");
+            throw new Exception("File not found, please try again");
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -57,8 +53,7 @@ public class FileManager {
             countWord++;
         }
 
-        System.out.println(countWord);
-
+        System.out.printf("Found %d %s%n", countWord, (countWord == 0) ? "result" : "results");
 
     }
 
