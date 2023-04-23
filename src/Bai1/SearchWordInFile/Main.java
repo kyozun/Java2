@@ -1,4 +1,4 @@
-package Bai1.TimKiem;
+package Bai1.SearchWordInFile;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Main {
                 int choose = inputFromUser.nextInt();
                 switch (choose) {
                     case 1 -> fileManager.showMenuOne();
-                    case 2 -> System.out.println("Choose 2");
+                    case 2 -> fileManager.showMenuTwo();
                     case 3 -> {
                         System.out.println("Good bye and see you again");
                         inputSuccess = true;
