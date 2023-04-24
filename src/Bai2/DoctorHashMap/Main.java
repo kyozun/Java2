@@ -7,23 +7,30 @@ public class Main {
         Scanner inputFromUser = new Scanner(System.in);
         DoctorManager doctorManager = new DoctorManager();
         boolean inputSuccess = false;
+        int chooseNumber;
 
         while (!inputSuccess) {
             try {
                 showMainMenu();
-                int chooseNumber = inputFromUser.nextInt();
+                try {
+                    chooseNumber = inputFromUser.nextInt();
+                } catch (Exception e) {
+                    throw new RuntimeException("Error, please enter a number sir");
+                }
                 switch (chooseNumber) {
                     case 1 -> doctorManager.addDoctor();
                     case 2 -> doctorManager.displayDoctor();
+                    case 3 -> doctorManager.updateDoctor();
                     case 4 -> doctorManager.deleteDoctor();
                     case 5 -> doctorManager.searchDoctor();
                     case 6 -> {
                         System.out.print("Goodbye and see you again");
                         inputSuccess = true;
                     }
+                    default -> System.out.println("Number does not exist, please try again");
                 }
             } catch (Exception e){
-                System.out.println("Error, please enter a number");
+                System.out.println(e.getMessage());
                 inputFromUser.nextLine();
             }
         }
@@ -39,7 +46,6 @@ public class Main {
         System.out.println("5. Search Doctor");
         System.out.println("6. Exit");
         System.out.print("Please choose [1 - 6]: ");
-
     }
 
 }
