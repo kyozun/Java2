@@ -2,7 +2,6 @@ package Bai2.DoctorHashMap;
 
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class DoctorManager {
     HashMap<String, Doctor> doctorHashMap = new HashMap<>();
@@ -63,7 +62,6 @@ public class DoctorManager {
         }
     }
 
-    //    System.out.print(doctorHashMap.values().stream().filter(result -> result.getName().contains(name)));
     public void searchDoctor() {
         Scanner inputFromUser = new Scanner(System.in);
         int count = 0;
@@ -71,16 +69,14 @@ public class DoctorManager {
         String name = inputFromUser.nextLine();
 
 
-        if (doctorHashMap.values().isEmpty()) {
-            System.out.println("*** Doctor not found ***");
-        } else {
+        if (checkDoctorExist(name)) {
             int length = 69;
             String line = String.format("%0" + length + "d", 0).replace('0', '-');
             System.out.println("+" + line + "+");
             System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", "CODE", "NAME", "SPECIALIZATION", "AVAILABILITY");
             System.out.println("+" + line + "+");
 
-            doctorHashMap.values().stream().filter(result -> result.getName().contains(name)).collect(Collectors.toList());
+//            System.out.println(doctorHashMap.values().stream().filter(result -> result.getName().contains(name)).map(Doctor::toString));
 
             for (Doctor doctor : doctorHashMap.values()) {
                 if (doctor.getName().contains(name)) {
@@ -89,7 +85,18 @@ public class DoctorManager {
             }
 
             System.out.println("+" + line + "+");
+        } else {
+            System.out.println("*** Doctor not found ***");
         }
+    }
+
+    private boolean checkDoctorExist(String name) {
+        for (Doctor doctor : doctorHashMap.values()) {
+            if (doctor.getName().contains(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateDoctor() {
