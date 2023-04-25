@@ -2,6 +2,8 @@ package Bai2.DoctorHashMap;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DoctorManager {
     HashMap<String, Doctor> doctorHashMap = new HashMap<>();
@@ -10,8 +12,15 @@ public class DoctorManager {
         String code, name, specialization;
         int availability;
         Scanner inputFromUser = new Scanner(System.in);
+
         System.out.print("Enter code: ");
         code = inputFromUser.nextLine();
+        Pattern patternCode = Pattern.compile("^[cC]\\d{3}$");
+        Matcher matcherCode = patternCode.matcher(code);
+        if (!matcherCode.matches()) {
+            throw new Exception("Code must be at least 4 characters and start with \"c\"");
+        }
+
         System.out.print("Enter name: ");
         name = inputFromUser.nextLine();
         System.out.print("Enter specialization: ");
@@ -31,9 +40,6 @@ public class DoctorManager {
         System.out.println("Doctor added successfully");
     }
 
-    /**
-     * Hàm hiển thị, hiển thị khi size != 0
-     */
     public void displayDoctor() {
         if (doctorHashMap.size() != 0) {
             int length = 69;
@@ -41,9 +47,9 @@ public class DoctorManager {
             System.out.println("+" + line + "+");
             System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", "CODE", "NAME", "SPECIALIZATION", "AVAILABILITY");
             System.out.println("+" + line + "+");
-            for (Doctor doctor : doctorHashMap.values()) {
-                System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", doctor.getCode(), doctor.getName(), doctor.getSpecialization(), doctor.getAvailability());
-            }
+
+            doctorHashMap.values().forEach(doctor -> System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", doctor.getCode().toUpperCase(), doctor.getName(), doctor.getSpecialization(), doctor.getAvailability()));
+
             System.out.println("+" + line + "+");
         } else {
             System.out.println("*** Data not found ***");
@@ -64,25 +70,17 @@ public class DoctorManager {
 
     public void searchDoctor() {
         Scanner inputFromUser = new Scanner(System.in);
-        int count = 0;
         System.out.print("Enter name: ");
         String name = inputFromUser.nextLine();
 
-
-        if (checkDoctorExist(name)) {
+        if (this.checkDoctorExist(name)) {
             int length = 69;
             String line = String.format("%0" + length + "d", 0).replace('0', '-');
             System.out.println("+" + line + "+");
             System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", "CODE", "NAME", "SPECIALIZATION", "AVAILABILITY");
             System.out.println("+" + line + "+");
 
-//            System.out.println(doctorHashMap.values().stream().filter(result -> result.getName().contains(name)).map(Doctor::toString));
-
-            for (Doctor doctor : doctorHashMap.values()) {
-                if (doctor.getName().contains(name)) {
-                    System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", doctor.getCode(), doctor.getName(), doctor.getSpecialization(), doctor.getAvailability());
-                }
-            }
+            doctorHashMap.values().stream().filter(doctor -> doctor.getName().contains(name)).forEach(doctor -> System.out.printf("| %-8s | %-16s | %-20s | %-14s |%n", doctor.getCode(), doctor.getName(), doctor.getSpecialization(), doctor.getAvailability()));
 
             System.out.println("+" + line + "+");
         } else {
@@ -91,19 +89,24 @@ public class DoctorManager {
     }
 
     private boolean checkDoctorExist(String name) {
-        for (Doctor doctor : doctorHashMap.values()) {
-            if (doctor.getName().contains(name)) {
-                return true;
-            }
-        }
-        return false;
+        return doctorHashMap.values().stream().anyMatch(doctor -> doctor.getName().contains(name));
     }
 
-    public void updateDoctor() {
+    public void updateDoctor() throws Exception {
         Scanner inputFromUser = new Scanner(System.in);
         System.out.print("Enter code: ");
         String code = inputFromUser.nextLine();
         if (doctorHashMap.containsKey(code)) {
+            System.out.print("Enter name: ");
+            doctorHashMap.get(code).setName(inputFromUser.nextLine());
+            System.out.print("Enter specialization: ");
+            doctorHashMap.get(code).setSpecialization(inputFromUser.nextLine());
+            System.out.print("Enter availability: ");
+            try {
+                doctorHashMap.get(code).setAvailability(inputFromUser.nextInt());
+            } catch (Exception e) {
+                throw new Exception("Availability must be number, please try again");
+            }
 
         } else {
             System.out.println("*** Data not found ***");

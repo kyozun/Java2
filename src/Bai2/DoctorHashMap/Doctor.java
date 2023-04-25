@@ -17,11 +17,6 @@ public class Doctor {
         return code;
     }
 
-    @Override
-    public String toString() {
-        return String.format("| %-8s | %-16s | %-20s | %-14s |%n",code,name,specialization,availability);
-    }
-
     public void setCode(String code) {
         this.code = code;
     }
