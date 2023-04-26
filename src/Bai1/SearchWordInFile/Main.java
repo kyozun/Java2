@@ -11,8 +11,8 @@ public class Main {
         do {
             try {
                 showMainMenu();
-                int choose = inputFromUser.nextInt();
-                switch (choose) {
+                int choice = inputFromUser.nextInt();
+                switch (choice) {
                     case 1 -> fileManager.showMenuOne();
                     case 2 -> fileManager.showMenuTwo();
                     case 3 -> {
