@@ -1,11 +1,12 @@
 package Bai3.Dictionary;
 
 import java.io.*;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class DictionaryManager {
-    private final String FILENAME = "C:\\Users\\dksat\\Desktop\\Java2\\src\\Bai3\\Dictionary\\data.txt";
+    private final String FILENAME = "data.txt";
     HashMap<String, MyDictionary> dictionaryHashMap = new HashMap<>();
 
     public void addWord() throws Exception {
@@ -74,18 +75,20 @@ public class DictionaryManager {
         }
     }
 
+    /*Lấy đường dẫn của thư mục gốc rồi tạo file txt*/
     public void loadData() {
-        File dataFile = new File(FILENAME);
-        if (!dataFile.exists()) {
-            try {
-                dataFile.createNewFile();
-            } catch (Exception e) {
-                System.out.println("Error creating file: " + e.getMessage());
+        File tempDirectory = new File(System.getProperty("user.dir"));
+        File dataFile = new File(tempDirectory, FILENAME);
+        try {
+            if (dataFile.createNewFile()) {
                 return;
             }
+        } catch (Exception e) {
+            System.out.println("Error creating file: " + e.getMessage());
+            return;
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILENAME))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(dataFile))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -98,14 +101,14 @@ public class DictionaryManager {
         }
     }
 
-    public void saveData() {
+    private void saveData() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILENAME))) {
             for (MyDictionary myDictionary : dictionaryHashMap.values()) {
                 bufferedWriter.write(String.format("%s,%s\n", myDictionary.getEnglishWord(), myDictionary.getVietnameseWord()));
             }
 
         } catch (IOException e) {
-            System.out.println("Error writting to file: " + e.getMessage());
+            System.out.println("Error writing to file: " + e.getMessage());
         }
     }
 }

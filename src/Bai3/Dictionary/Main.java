@@ -14,7 +14,6 @@ public class Main {
         dictionaryManager.loadData();
         while (!inputSuccess) {
             try {
-
                 showMainMenu();
                 try {
                     choice = inputFromUser.nextInt();
@@ -30,13 +29,12 @@ public class Main {
                         System.out.println("Goodbye my friend");
                         inputSuccess = true;
                     }
-                    default -> System.out.println("Error, number does not exist, please try again");
+                    default -> System.out.println("Number does not exist, please try again");
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 inputFromUser.nextLine();
             }
-
         }
     }
 
@@ -50,4 +48,6 @@ public class Main {
         System.out.println("5. Exit");
         System.out.print("Please select [1 - 5]: ");
     }
+
+
 }
