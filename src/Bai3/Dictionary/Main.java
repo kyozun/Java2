@@ -4,13 +4,17 @@ import java.util.Scanner;
 
 
 public class Main {
+
     public static void main(String[] args) {
         DictionaryManager dictionaryManager = new DictionaryManager();
         Scanner inputFromUser = new Scanner(System.in);
         int choice;
         boolean inputSuccess = false;
+
+        dictionaryManager.loadData();
         while (!inputSuccess) {
             try {
+
                 showMainMenu();
                 try {
                     choice = inputFromUser.nextInt();
@@ -19,9 +23,10 @@ public class Main {
                 }
                 switch (choice) {
                     case 1 -> dictionaryManager.addWord();
-                    case 2 -> dictionaryManager.removeWord();
-                    case 3 -> dictionaryManager.translateWord();
-                    case 4 -> {
+                    case 2 -> dictionaryManager.displayWord();
+                    case 3 -> dictionaryManager.removeWord();
+                    case 4 -> dictionaryManager.translateWord();
+                    case 5 -> {
                         System.out.println("Goodbye my friend");
                         inputSuccess = true;
                     }
@@ -39,9 +44,10 @@ public class Main {
         System.out.println("MENU");
         System.out.println("====");
         System.out.println("1. Add word");
-        System.out.println("2. Remove word");
-        System.out.println("3. Translate");
-        System.out.println("4. Exit");
-        System.out.print("Please select [1 - 4]: ");
+        System.out.println("2. Display word");
+        System.out.println("3. Remove word");
+        System.out.println("4. Translate");
+        System.out.println("5. Exit");
+        System.out.print("Please select [1 - 5]: ");
     }
 }
