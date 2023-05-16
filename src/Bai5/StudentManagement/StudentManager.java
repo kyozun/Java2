@@ -12,7 +12,7 @@ public class StudentManager {
 
     public void addStudent() throws Exception {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-5GA3GV2H\\SQLEXPRESS;instance=SQLEXPRESS;database=Student;encrypt=true;trustServerCertificate=true;", "cuong", "Hanyeu99");
+            Connection connection = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-5GA3GV2H\\SQLEXPRESS;instance=SQLEXPRESS;database=Student;encrypt=true;trustServerCertificate=true;", "cuong", "123456");
             PreparedStatement preparedStatement = connection.prepareStatement("insert into StudentData(ID, Name, DateOfBirth, Gender, Phone, GPA) values (?,?,?,?,?,?)");
             Scanner inputFromUser = new Scanner(System.in);
             System.out.print("Enter student ID: ");
