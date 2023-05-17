@@ -6,7 +6,7 @@
       <synchronize>true</synchronize>
       <remarks>SQL</remarks>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://LAPTOP-5GA3GV2H\SQLEXPRESS;instance=SQLEXPRESS;database=Student</jdbc-url>
+      <jdbc-url>jdbc:sqlserver://LAPTOP-5GA3GV2H\SQLEXPRESS;database=Student</jdbc-url>
       <driver-properties>
         <property name="encrypt" value="True" />
         <property name="trustServerCertificate" value="true" />

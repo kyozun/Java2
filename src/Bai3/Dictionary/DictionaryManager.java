@@ -9,6 +9,10 @@ public class DictionaryManager {
     private final String FILENAME = "data.txt";
     HashMap<String, MyDictionary> dictionaryHashMap = new HashMap<>();
 
+    public DictionaryManager() {
+        this.loadData();
+    }
+
     public void addWord() throws Exception {
         Scanner inputFromUser = new Scanner(System.in);
         System.out.print("Enter english word: ");

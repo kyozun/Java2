@@ -11,7 +11,6 @@ public class Main {
         int choice;
         boolean inputSuccess = false;
 
-        dictionaryManager.loadData();
         while (!inputSuccess) {
             try {
                 showMainMenu();
