@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Student@LAPTOP-5GA3GV2H" uuid="b70d6640-98da-4d38-842e-f05f26a93b54">
+    <data-source source="LOCAL" name="Contact@LAPTOP-5GA3GV2H" uuid="b70d6640-98da-4d38-842e-f05f26a93b54">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <remarks>SQL</remarks>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://LAPTOP-5GA3GV2H\SQLEXPRESS;database=Student</jdbc-url>
+      <jdbc-url>jdbc:sqlserver://LAPTOP-5GA3GV2H\SQLEXPRESS;database=Contact</jdbc-url>
       <driver-properties>
         <property name="encrypt" value="True" />
         <property name="trustServerCertificate" value="true" />
